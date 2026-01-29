@@ -66,4 +66,4 @@ let func2: Func2 = (a) => {};
 
 // 매개변수 갯수로 판단
 func1 = func2;
-func2 = func1; // 에러 발생
+// func2 = func1; // 에러 발생
