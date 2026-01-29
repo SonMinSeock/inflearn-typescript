@@ -15,7 +15,7 @@ type Cat = {
 type Animal = Dog | Cat;
 
 // is 키워드
-// 만약 반환 값이 true이면 animal은 Dog 타입이다.
+// 만약 반환 값이 true이면 animal 매개변수가 Dog 타입으로 좁혀준다.
 function isDog(animal: Animal): animal is Dog {
   return (animal as Dog).isBark !== undefined;
 }
