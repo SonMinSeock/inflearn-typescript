@@ -1,5 +1,6 @@
 /**
  * keyof 연산자
+ * key 타입들을 유니온 타입으로 구성
  */
 
 // interface Person {
