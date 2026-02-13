@@ -1,7 +1,7 @@
-import React, { Children, ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 
 interface Props {
-  onClickAdd: (text: string) => void;
+  addTodo: (text: string) => void;
 }
 
 export default function Editor(props: Props) {
@@ -15,7 +15,7 @@ export default function Editor(props: Props) {
 
   // 추가 버튼에 대한 이벤트 핸들러 함수
   const onClickButton = () => {
-    props.onClickAdd(text);
+    props.addTodo(text);
     setText('');
   };
   return (
