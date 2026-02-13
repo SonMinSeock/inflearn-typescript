@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { useTodoDispatch } from '../hooks/useTodoDispatch';
 
-interface Props {
-  addTodo: (text: string) => void;
-}
+export default function Editor() {
+  // Todo 디스패치 컨텍스트
+  const dispatch = useTodoDispatch();
 
-export default function Editor(props: Props) {
   // Todo 텍스트 입력 값에 대한 상태
   const [text, setText] = useState('');
 
@@ -15,7 +15,7 @@ export default function Editor(props: Props) {
 
   // 추가 버튼에 대한 이벤트 핸들러 함수
   const onClickButton = () => {
-    props.addTodo(text);
+    dispatch.addTodo(text);
     setText('');
   };
   return (

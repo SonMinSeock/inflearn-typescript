@@ -1,14 +1,15 @@
-import React from 'react';
 import { Todo } from '../types';
+import { useTodoDispatch } from '../hooks/useTodoDispatch';
 
-interface Props extends Todo {
-  deleteTodo: (targetId: number) => void;
-}
+interface Props extends Todo {}
 
 export default function TodoItem(props: Props) {
+  // Todo 디스패치 컨텍스트
+  const dispatch = useTodoDispatch();
+
   // 삭제 버튼 클릭 이벤트 핸들러 함수
   const onClickDeleteButton = () => {
-    props.deleteTodo(props.id);
+    dispatch.deleteTodo(props.id);
   };
 
   return (

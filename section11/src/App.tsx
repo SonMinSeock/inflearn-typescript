@@ -1,4 +1,4 @@
-import { useEffect, useRef, useReducer } from 'react';
+import { useEffect, useRef, useReducer, createContext } from 'react';
 import './App.css';
 import Editor from './components/Editor';
 import TodoItem from './components/TodoItem';
@@ -30,6 +30,15 @@ function reducer(state: Todo[], action: Action) {
     }
   }
 }
+
+// Todo 상태 컨텍스트
+export const TodoStateContext = createContext<Todo[]>([]);
+
+// Todo 상태 디스패치 컨텍스트
+export const TodoDispatchContext = createContext<{
+  addTodo: (text: string) => void;
+  deleteTodo: (targetId: number) => void;
+} | null>(null);
 
 function App() {
   // Todo 리스트 상태
@@ -66,12 +75,21 @@ function App() {
   return (
     <div className="App">
       <h1>Todo</h1>
-      <Editor addTodo={addTodo} />
-      <div>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} {...todo} deleteTodo={deleteTodo} />
-        ))}
-      </div>
+      <TodoStateContext.Provider value={todos}>
+        <TodoDispatchContext.Provider
+          value={{
+            addTodo,
+            deleteTodo,
+          }}
+        >
+          <Editor />
+          <div>
+            {todos.map((todo) => (
+              <TodoItem key={todo.id} {...todo} />
+            ))}
+          </div>
+        </TodoDispatchContext.Provider>
+      </TodoStateContext.Provider>
     </div>
   );
 }
